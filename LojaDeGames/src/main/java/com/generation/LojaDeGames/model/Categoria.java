@@ -9,10 +9,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.sun.istack.NotNull;
 
 @Entity
 @Table(name = "tb_categoria")
@@ -23,12 +23,12 @@ public class Categoria {
 	private long id;
 
 	@NotNull
-	@Size(min = 1, max = 30)
+	@Size(min = 5, max = 30)
 	private String nome;
 
-	/*@OneToMany(mappedBy = "Categoria", cascade = CascadeType.ALL)
-	@JsonIgnoreProperties("Categoria") 
-	private List<Produto> produto;*/
+	@OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL)
+	@JsonIgnoreProperties("categoria")
+	private List<Produto> produto;
 	
 
 	public long getId() {
@@ -47,14 +47,12 @@ public class Categoria {
 		this.nome = nome;
 	}
 
-	/*public List<Produto> getProduto() {
+	public List<Produto> getProduto() {
 		return produto;
 	}
 
 	public void setProduto(List<Produto> produto) {
 		this.produto = produto;
-	}*/
-
+	}
 	
-
 }
